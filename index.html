@@ -1,0 +1,22 @@
+<HTML>
+<HEADER><TITLE> See on browser tab</TITLE></HEADER>
+<BODY style="background-color:red">
+Hello World
+<BR>
+<BR>
+<BR>
+
+<a class="weatherwidget-io" href="https://forecast7.com/en/43d65n79d38/toronto/" data-label_1="TORONTO" data-label_2="WEATHER" data-theme="original" >TORONTO WEATHER</a>
+<script>
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+</script>
+<BR>
+<BR>
+<BR>
+
+<iframe src="https://calendar.google.com/calendar/embed?src=andrew.jimenez%40tdsb.on.ca&ctz=America%2FToronto" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+
+
+<!img align = "middle" = src="bpci.jpg" width="500" height = "200">
+</BODY>
+</HTML>
