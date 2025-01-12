@@ -1,36 +1,36 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teachable Machine Pose Model with p5.js</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
-    <script src="script.js"></script>
-    <style>
-        /* Add styles to increase font size for predictions */
-        #label-container div {
-            font-size: 50px; /* Increase this value to make the font larger */
-            margin: 4px 0; /* Add some margin for spacing between predictions */
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Pose Detection</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <div>Teachable Machine Pose Model</div>
-    <button id="start-pose-button">Start Pose Detection</button>
-    <button id="start-video-button">Start Instruction Video</button>
-    <button id="stop-button">Stop</button>
-    <div style="display: flex; gap: 20px;">
-        <div><canvas id="canvas"></canvas></div>
-        <div>
-            <video id="instructional-video" width="640" height="480" style="display: none;">
-                <source src="vid2.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div id="video-time" style="font-size: 20px; margin-top: 10px;">Video Time: 0.00 seconds</div>
-        </div>
+  <div class="container">
+    <div class="button-container">
+      <div class="button-pair">
+        <button type="button" onclick="init()">Start Webcam</button>
+        <button type="button" onclick="stopWebcam()">Stop Webcam</button>
+      </div>
+      <div class="button-pair">
+        <button type="button" onclick="playInstructionVideo()">Start Video</button>
+        <button type="button" onclick="stopInstructionVideo()">Stop Video</button>
+      </div>
+    </div>
+    <div class="video-container">
+      <div><canvas id="canvas"></canvas></div>
+      <div class="video-wrapper">
+        <video id="instructionVideo" src="vid.mp4"></video>
+        <div id="videoTime">Time: 0:00</div>
+      </div>
     </div>
     <div id="label-container"></div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
