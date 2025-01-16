@@ -3,19 +3,21 @@ Conversation opened. 2 messages. All messages read.
 
 Skip to content
 Using TDSB Mail with screen readers
-in:sent 
+colin 
 
-9 of 4,638
+2 of many
 (no subject)
 Inbox
 
 Hu, Colin
-Jan 15, 2025, 1:40 PM (18 hours ago)
+Wed, Jan 15, 1:40 PM (18 hours ago)
+to me
+
 https://teachablemachine.withgoogle.com/models/bp4ebeIU6/
 
 Jimenez, Andrew <andrew.jimenez@tdsb.on.ca>
 Attachments
-Jan 15, 2025, 1:55 PM (17 hours ago)
+Wed, Jan 15, 1:55 PM (18 hours ago)
 to Colin
 
 
@@ -30,7 +32,6 @@ Teacher, Birchmount Park C.I.
 416-396-6704
  One attachment
   •  Scanned by Gmail
-ararat.berhe@student.tdsb.on.ca. Press tab to insert.
 /**
  * Pose Detection Application
  * Using TensorFlow.js and Teachable Machine
