@@ -8,7 +8,7 @@
 // Model URL from Teachable Machine
 //**************************************************
 //* as before, paste your lnk below
-let URL = "paste your link here";
+let URL = "https://teachablemachine.withgoogle.com/models/CMBhs4EAW/";
 
 
 
