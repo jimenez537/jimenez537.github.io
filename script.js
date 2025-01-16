@@ -1,4 +1,36 @@
 
+Conversation opened. 2 messages. All messages read.
+
+Skip to content
+Using TDSB Mail with screen readers
+in:sent 
+
+9 of 4,638
+(no subject)
+Inbox
+
+Hu, Colin
+Jan 15, 2025, 1:40 PM (18 hours ago)
+https://teachablemachine.withgoogle.com/models/bp4ebeIU6/
+
+Jimenez, Andrew <andrew.jimenez@tdsb.on.ca>
+Attachments
+Jan 15, 2025, 1:55 PM (17 hours ago)
+to Colin
+
+
+
+On Wed, Jan 15, 2025 at 1:40 PM Hu, Colin <colin.hu@student.tdsb.on.ca> wrote:
+https://teachablemachine.withgoogle.com/models/bp4ebeIU6/
+
+
+--
+Andrew Jimenez
+Teacher, Birchmount Park C.I.
+416-396-6704
+ One attachment
+  •  Scanned by Gmail
+ararat.berhe@student.tdsb.on.ca. Press tab to insert.
 /**
  * Pose Detection Application
  * Using TensorFlow.js and Teachable Machine
@@ -8,7 +40,7 @@
 // Model URL from Teachable Machine
 //**************************************************
 //* as before, paste your lnk below
-let URL = "https://teachablemachine.withgoogle.com/models/CMBhs4EAW/";
+let URL = "https://teachablemachine.withgoogle.com/models/bp4ebeIU6/";
 
 
 
@@ -98,13 +130,13 @@ async function predict() {
 function checkPose(prediction, video) {
     const time = video.currentTime;
     const prob = prediction.probability;
-    
+
     // Only respond to pose1 through pose5 labels
     const poseNumber = prediction.className.toLowerCase().replace(/[^0-9]/g, '');
     const isPoseLabel = prediction.className.toLowerCase().includes('pose') && poseNumber >= 1 && poseNumber <= 5;
-    
+
     if (!isPoseLabel) return;
-    
+
     if (!poseStates[`pose${poseNumber}`]) {
         poseStates[`pose${poseNumber}`] = {
             triggered: false,
@@ -115,7 +147,7 @@ function checkPose(prediction, video) {
 
     if (prob > 0.8 && !explosionActive) {
         const poseState = poseStates[`pose${poseNumber}`];
-        
+
         switch(poseNumber) {
             case '1':
                 if (time >= 0.9 && time <= 3.0 && !poseState.triggered) {
@@ -231,7 +263,7 @@ async function playInstructionVideo() {
     if (model) {
         processFrame();
     } else {
-        console.log("Please start webcam first to load the model");
+        console.log("https://teachablemachine.withgoogle.com/models/bp4ebeIU6/");
     }
 }
 
@@ -259,3 +291,5 @@ function stopWebcam() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 }
+colin.txt
+Displaying colin.txt.
