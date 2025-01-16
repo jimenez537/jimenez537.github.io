@@ -1,37 +1,4 @@
 
-Conversation opened. 2 messages. All messages read.
-
-Skip to content
-Using TDSB Mail with screen readers
-colin 
-
-2 of many
-(no subject)
-Inbox
-
-Hu, Colin
-Wed, Jan 15, 1:40 PM (18 hours ago)
-to me
-
-https://teachablemachine.withgoogle.com/models/bp4ebeIU6/
-
-Jimenez, Andrew <andrew.jimenez@tdsb.on.ca>
-Attachments
-Wed, Jan 15, 1:55 PM (18 hours ago)
-to Colin
-
-
-
-On Wed, Jan 15, 2025 at 1:40 PM Hu, Colin <colin.hu@student.tdsb.on.ca> wrote:
-https://teachablemachine.withgoogle.com/models/bp4ebeIU6/
-
-
---
-Andrew Jimenez
-Teacher, Birchmount Park C.I.
-416-396-6704
- One attachment
-  •  Scanned by Gmail
 /**
  * Pose Detection Application
  * Using TensorFlow.js and Teachable Machine
@@ -292,5 +259,3 @@ function stopWebcam() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 }
-colin.txt
-Displaying colin.txt.
