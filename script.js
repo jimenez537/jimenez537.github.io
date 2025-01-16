@@ -8,7 +8,7 @@
 // Model URL from Teachable Machine
 //**************************************************
 //* as before, paste your lnk below
-let URL = "https://teachablemachine.withgoogle.com/models/bp4ebeIU6/";
+let URL = "paste your link here";
 
 
 
@@ -231,7 +231,7 @@ async function playInstructionVideo() {
     if (model) {
         processFrame();
     } else {
-        console.log("https://teachablemachine.withgoogle.com/models/bp4ebeIU6/");
+        console.log("Please start webcam first to load the model");
     }
 }
 
