@@ -18,12 +18,7 @@ let model, webcam, ctx, labelContainer, maxPredictions;
 // Dynamic pose tracking
 let poseStates = {};
 let explosionActive = false;
-let explosionSound = new Audio('./explsn.mp3');
-let score = 0;
-
-function updateScore() {
-    document.getElementById('score').textContent = score;
-}
+let explosionSound = new Audio('explsn.mp3');
 
 function setModelURL(url) {
     URL = url;
@@ -163,8 +158,6 @@ function triggerExplosion(poseState) {
     explosionActive = true;
     poseState.triggered = true;
     playExplosionSound();
-    score += 1;
-    updateScore();
     setTimeout(() => { explosionActive = false; }, 300);
 }
 
@@ -193,7 +186,7 @@ function drawPose(pose, explode) {
 
 async function playInstructionVideo() {
     const video = document.getElementById('instructionVideo');
-    const videoSrc = video.getAttribute('data-video-src') || './vid.mp4';
+    const videoSrc = video.getAttribute('data-video-src') || 'vid.mp4';
     video.src = videoSrc;
     const videoContainer = video.parentElement;
 
@@ -256,8 +249,6 @@ function stopInstructionVideo() {
     pose3SecondWindowTriggered = false;
     pose4Triggered = false;
     pose5Triggered = false;
-    score = 0;
-    updateScore();
 }
 
 function stopWebcam() {
