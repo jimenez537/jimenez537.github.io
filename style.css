@@ -94,11 +94,3 @@ canvas {
 #label-container div {
   margin: 10px 0;
 }
-
-#score-container {
-  font-size: 48px;
-  font-weight: bold;
-  color: #4CAF50;
-  text-align: center;
-  margin-top: 20px;
-}
