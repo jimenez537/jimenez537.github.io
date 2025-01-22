@@ -1,35 +1,16 @@
-
-/**
- * Pose Detection Application
- * Using TensorFlow.js and Teachable Machine
- * Created: January 2024
- */
-
-// Model URL from Teachable Machine
-//**************************************************
-//* as before, paste your lnk below
 let URL = "https://teachablemachine.withgoogle.com/models/d0TZ5wL3b/";
 
-
-
-
 let model, webcam, ctx, labelContainer, maxPredictions;
-
-// Dynamic pose tracking
 let poseStates = {};
 let explosionActive = false;
 let explosionSound = new Audio('explsn.mp3');
 
 function setModelURL(url) {
     URL = url;
-    // Reset states when URL changes
     poseStates = {};
     explosionActive = false;
 }
 
-/**
- * Initialize the application
- */
 async function init() {
     const modelURL = URL + "model.json";
     const metadataURL = URL + "metadata.json";
@@ -84,8 +65,6 @@ async function predict() {
             const classPrediction =
                 prediction[i].className + ": " + prediction[i].probability.toFixed(2);
             labelContainer.childNodes[i].innerHTML = classPrediction;
-
-            // Check pose dynamically
             checkPose(prediction[i], video);
         }
 
@@ -98,8 +77,6 @@ async function predict() {
 function checkPose(prediction, video) {
     const time = video.currentTime;
     const prob = prediction.probability;
-
-    // Only respond to pose1 through pose5 labels
     const poseNumber = prediction.className.toLowerCase().replace(/[^0-9]/g, '');
     const isPoseLabel = prediction.className.toLowerCase().includes('pose') && poseNumber >= 1 && poseNumber <= 5;
 
