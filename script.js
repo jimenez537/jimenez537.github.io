@@ -1,9 +1,15 @@
-let URL = "https://teachablemachine.withgoogle.com/models/d0TZ5wL3b/";
 
+/**
+ * Pose Detection Application
+ * Using TensorFlow.js and Teachable Machine
+ */
+
+let URL = "https://teachablemachine.withgoogle.com/models/m8Wm3jRiN/";
 let model, webcam, ctx, labelContainer, maxPredictions;
+
 let poseStates = {};
 let explosionActive = false;
-let explosionSound = new Audio('explsn.mp3');
+let explosionSound = new Audio('./explsn.mp3');
 
 function setModelURL(url) {
     URL = url;
@@ -50,7 +56,7 @@ async function loop(timestamp) {
 }
 
 function playExplosionSound() {
-    const newSound = new Audio('explsn.mp3');
+    const newSound = new Audio('./explsn.mp3');
     newSound.volume = 1.0;
     newSound.play();
 }
@@ -77,11 +83,12 @@ async function predict() {
 function checkPose(prediction, video) {
     const time = video.currentTime;
     const prob = prediction.probability;
+    
     const poseNumber = prediction.className.toLowerCase().replace(/[^0-9]/g, '');
     const isPoseLabel = prediction.className.toLowerCase().includes('pose') && poseNumber >= 1 && poseNumber <= 5;
-
+    
     if (!isPoseLabel) return;
-
+    
     if (!poseStates[`pose${poseNumber}`]) {
         poseStates[`pose${poseNumber}`] = {
             triggered: false,
@@ -90,32 +97,40 @@ function checkPose(prediction, video) {
         };
     }
 
-    if (prob > 0.7 && !explosionActive) {
+    if (prob > 0.8 && !explosionActive) {
         const poseState = poseStates[`pose${poseNumber}`];
-
+        
         switch(poseNumber) {
             case '1':
-                if (time >= 1.0 && time <= 5.0 && !poseState.triggered) {
+                if (time >= 0.9 && time <= 3.0 && !poseState.triggered) {
                     triggerExplosion(poseState);
                 }
                 break;
             case '2':
-                if (time >= 5.0 && time <= 8.0 && !poseState.triggered) {
+                if (time >= 5.5 && time <= 7.5 && !poseState.triggered) {
                     triggerExplosion(poseState);
                 }
                 break;
             case '3':
-               if (time >= 17.0 && time <= 19.0 && !poseState.triggered) {
-                    triggerExplosion(poseState);
+                if ((time >= 11.5 && time <= 13.0 && !poseState.firstWindowTriggered) ||
+                    (time >= 17.5 && time <= 19.5 && !poseState.secondWindowTriggered)) {
+                    if (time <= 13.0) {
+                        poseState.firstWindowTriggered = true;
+                    } else {
+                        poseState.secondWindowTriggered = true;
+                    }
+                    explosionActive = true;
+                    playExplosionSound();
+                    setTimeout(() => { explosionActive = false; }, 300);
                 }
                 break;
             case '4':
-                if (time >= 20.0 && time <= 22.0 && !poseState.triggered) {
+                if (time >= 15.5 && time <= 16.6 && !poseState.triggered) {
                     triggerExplosion(poseState);
                 }
                 break;
             case '5':
-                if (time >= 25.0 && !poseState.triggered) {
+                if (time >= 19.5 && !poseState.triggered) {
                     triggerExplosion(poseState);
                 }
                 break;
@@ -155,7 +170,7 @@ function drawPose(pose, explode) {
 
 async function playInstructionVideo() {
     const video = document.getElementById('instructionVideo');
-    const videoSrc = video.getAttribute('data-video-src') || 'vid.mp4';
+    const videoSrc = video.getAttribute('data-video-src') || './vid.mp4';
     video.src = videoSrc;
     const videoContainer = video.parentElement;
 
@@ -200,7 +215,7 @@ async function playInstructionVideo() {
     if (model) {
         processFrame();
     } else {
-        console.log("https://teachablemachine.withgoogle.com/models/d0TZ5wL3b/");
+        console.log("Please start webcam first to load the model");
     }
 }
 
@@ -212,7 +227,12 @@ function stopInstructionVideo() {
     if (canvas) {
         canvas.remove();
     }
-    poseStates = {};
+    pose1Triggered = false;
+    pose2Triggered = false;
+    pose3FirstWindowTriggered = false;
+    pose3SecondWindowTriggered = false;
+    pose4Triggered = false;
+    pose5Triggered = false;
 }
 
 function stopWebcam() {
