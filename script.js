@@ -4,7 +4,7 @@
  * Using TensorFlow.js and Teachable Machine
  */
 
-let URL = "https://teachablemachine.withgoogle.com/models/m8Wm3jRiN/";
+let URL = "https://teachablemachine.withgoogle.com/models/X1_2x-n0-/";
 let model, webcam, ctx, labelContainer, maxPredictions;
 
 let poseStates = {};
