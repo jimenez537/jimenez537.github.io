@@ -2,21 +2,34 @@
 /**
  * Pose Detection Application
  * Using TensorFlow.js and Teachable Machine
+ * Created: January 2024
  */
 
+// Model URL from Teachable Machine
+//**************************************************
+//* as before, paste your lnk below
 let URL = "https://teachablemachine.withgoogle.com/models/X1_2x-n0-/";
+
+
+
+
 let model, webcam, ctx, labelContainer, maxPredictions;
 
+// Dynamic pose tracking
 let poseStates = {};
 let explosionActive = false;
-let explosionSound = new Audio('./explsn.mp3');
+let explosionSound = new Audio('explsn.mp3');
 
 function setModelURL(url) {
     URL = url;
+    // Reset states when URL changes
     poseStates = {};
     explosionActive = false;
 }
 
+/**
+ * Initialize the application
+ */
 async function init() {
     const modelURL = URL + "model.json";
     const metadataURL = URL + "metadata.json";
@@ -56,7 +69,7 @@ async function loop(timestamp) {
 }
 
 function playExplosionSound() {
-    const newSound = new Audio('./explsn.mp3');
+    const newSound = new Audio('explsn.mp3');
     newSound.volume = 1.0;
     newSound.play();
 }
@@ -71,6 +84,8 @@ async function predict() {
             const classPrediction =
                 prediction[i].className + ": " + prediction[i].probability.toFixed(2);
             labelContainer.childNodes[i].innerHTML = classPrediction;
+
+            // Check pose dynamically
             checkPose(prediction[i], video);
         }
 
@@ -83,12 +98,13 @@ async function predict() {
 function checkPose(prediction, video) {
     const time = video.currentTime;
     const prob = prediction.probability;
-    
+
+    // Only respond to pose1 through pose5 labels
     const poseNumber = prediction.className.toLowerCase().replace(/[^0-9]/g, '');
     const isPoseLabel = prediction.className.toLowerCase().includes('pose') && poseNumber >= 1 && poseNumber <= 5;
-    
+
     if (!isPoseLabel) return;
-    
+
     if (!poseStates[`pose${poseNumber}`]) {
         poseStates[`pose${poseNumber}`] = {
             triggered: false,
@@ -99,7 +115,7 @@ function checkPose(prediction, video) {
 
     if (prob > 0.8 && !explosionActive) {
         const poseState = poseStates[`pose${poseNumber}`];
-        
+
         switch(poseNumber) {
             case '1':
                 if (time >= 0.9 && time <= 3.0 && !poseState.triggered) {
@@ -170,7 +186,7 @@ function drawPose(pose, explode) {
 
 async function playInstructionVideo() {
     const video = document.getElementById('instructionVideo');
-    const videoSrc = video.getAttribute('data-video-src') || './vid.mp4';
+    const videoSrc = video.getAttribute('data-video-src') || 'vid.mp4';
     video.src = videoSrc;
     const videoContainer = video.parentElement;
 
@@ -215,7 +231,7 @@ async function playInstructionVideo() {
     if (model) {
         processFrame();
     } else {
-        console.log("Please start webcam first to load the model");
+        console.log("https://teachablemachine.withgoogle.com/models/X1_2x-n0-/");
     }
 }
 
