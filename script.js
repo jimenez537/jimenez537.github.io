@@ -31,34 +31,45 @@ function setModelURL(url) {
  * Initialize the application
  */
 async function init() {
-    const modelURL = URL + "model.json";
-    const metadataURL = URL + "metadata.json";
-
-    const video = document.getElementById('instructionVideo');
-    video.volume = 0.4;
-
     try {
+        // First check if we have webcam access
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        stream.getTracks().forEach(track => track.stop()); // Stop the test stream
+
+        const modelURL = URL + "model.json";
+        const metadataURL = URL + "metadata.json";
+
+        const video = document.getElementById('instructionVideo');
+        video.volume = 0.4;
+
+        // Load the model
         model = await tmPose.load(modelURL, metadataURL);
         maxPredictions = model.getTotalClasses();
 
+        // Setup webcam
         const width = 600;
         const height = 600;
         const flip = true;
         webcam = new tmPose.Webcam(width, height, flip);
         await webcam.setup();
         await webcam.play();
-        window.requestAnimationFrame(loop);
 
+        // Setup canvas and labels
         const canvas = document.getElementById("canvas");
         canvas.width = width;
         canvas.height = height;
         ctx = canvas.getContext("2d");
         labelContainer = document.getElementById("label-container");
+        labelContainer.innerHTML = ''; // Clear existing content
         for (let i = 0; i < maxPredictions; i++) {
             labelContainer.appendChild(document.createElement("div"));
         }
+
+        // Start the animation loop
+        window.requestAnimationFrame(loop);
     } catch (error) {
-        console.error("Error initializing model:", error);
+        console.error("Error:", error);
+        alert("Error accessing webcam or loading model. Please ensure you've granted camera permissions and try again.");
     }
 }
 
