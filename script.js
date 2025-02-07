@@ -197,7 +197,7 @@ function drawPose(pose, explode) {
 
 async function playInstructionVideo() {
     const video = document.getElementById('instructionVideo');
-    const videoSrc = video.getAttribute('data-video-src') || 'vid.mp4';
+    const videoSrc = video.getAttribute('data-video-src') || 'vid4.mp4';
     video.src = videoSrc;
     const videoContainer = video.parentElement;
 
