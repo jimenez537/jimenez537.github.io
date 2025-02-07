@@ -31,45 +31,34 @@ function setModelURL(url) {
  * Initialize the application
  */
 async function init() {
+    const modelURL = URL + "model.json";
+    const metadataURL = URL + "metadata.json";
+
+    const video = document.getElementById('instructionVideo');
+    video.volume = 0.4;
+
     try {
-        // First check if we have webcam access
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        stream.getTracks().forEach(track => track.stop()); // Stop the test stream
-
-        const modelURL = URL + "model.json";
-        const metadataURL = URL + "metadata.json";
-
-        const video = document.getElementById('instructionVideo');
-        video.volume = 0.4;
-
-        // Load the model
         model = await tmPose.load(modelURL, metadataURL);
         maxPredictions = model.getTotalClasses();
 
-        // Setup webcam
         const width = 600;
         const height = 600;
         const flip = true;
         webcam = new tmPose.Webcam(width, height, flip);
         await webcam.setup();
         await webcam.play();
+        window.requestAnimationFrame(loop);
 
-        // Setup canvas and labels
         const canvas = document.getElementById("canvas");
         canvas.width = width;
         canvas.height = height;
         ctx = canvas.getContext("2d");
         labelContainer = document.getElementById("label-container");
-        labelContainer.innerHTML = ''; // Clear existing content
         for (let i = 0; i < maxPredictions; i++) {
             labelContainer.appendChild(document.createElement("div"));
         }
-
-        // Start the animation loop
-        window.requestAnimationFrame(loop);
     } catch (error) {
-        console.error("Error:", error);
-        alert("Error accessing webcam or loading model. Please ensure you've granted camera permissions and try again.");
+        console.error("Error initializing model:", error);
     }
 }
 
@@ -109,13 +98,13 @@ async function predict() {
 function checkPose(prediction, video) {
     const time = video.currentTime;
     const prob = prediction.probability;
-
+    
     // Only respond to pose1 through pose5 labels
     const poseNumber = prediction.className.toLowerCase().replace(/[^0-9]/g, '');
     const isPoseLabel = prediction.className.toLowerCase().includes('pose') && poseNumber >= 1 && poseNumber <= 5;
-
+    
     if (!isPoseLabel) return;
-
+    
     if (!poseStates[`pose${poseNumber}`]) {
         poseStates[`pose${poseNumber}`] = {
             triggered: false,
@@ -126,7 +115,7 @@ function checkPose(prediction, video) {
 
     if (prob > 0.8 && !explosionActive) {
         const poseState = poseStates[`pose${poseNumber}`];
-
+        
         switch(poseNumber) {
             case '1':
                 if (time >= 0.9 && time <= 3.0 && !poseState.triggered) {
@@ -197,7 +186,7 @@ function drawPose(pose, explode) {
 
 async function playInstructionVideo() {
     const video = document.getElementById('instructionVideo');
-    const videoSrc = video.getAttribute('data-video-src') || 'vid4.mp4';
+    const videoSrc = video.getAttribute('data-video-src') || 'vid.mp4';
     video.src = videoSrc;
     const videoContainer = video.parentElement;
 
@@ -242,7 +231,7 @@ async function playInstructionVideo() {
     if (model) {
         processFrame();
     } else {
-        console.log("https://teachablemachine.withgoogle.com/models/m8Wm3jRiN/");
+        console.log("Please start webcam first to load the model");
     }
 }
 
