@@ -2,7 +2,7 @@
 /**
  * Pose Detection Application
  * Using TensorFlow.js and Teachable Machine
- * Created: January 2024
+ * Created: January 2027
  */
 
 // Model URL from Teachable Machine
