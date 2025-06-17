@@ -188,6 +188,15 @@ async function playInstructionVideo() {
     const video = document.getElementById('instructionVideo');
     const videoSrc = video.getAttribute('data-video-src') || 'vid.mp4';
     video.src = videoSrc;
+    
+    // Add error handling for video loading
+    video.onerror = function() {
+        console.error('Video failed to load:', videoSrc);
+    };
+    
+    video.onloadstart = function() {
+        console.log('Video loading started');
+    };
     const videoContainer = video.parentElement;
 
     video.addEventListener('timeupdate', () => {
@@ -223,6 +232,7 @@ async function playInstructionVideo() {
                 }
             } catch (error) {
                 console.error('Pose detection error:', error);
+                // Continue processing even if pose detection fails
             }
             requestAnimationFrame(processFrame);
         }
