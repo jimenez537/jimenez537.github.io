@@ -8,7 +8,7 @@
 // Model URL from Teachable Machine
 //**************************************************
 //* as before, paste your lnk below
-let URL = "https://teachablemachine.withgoogle.com/models/Yo8l9ARar/";
+let URL = "https://teachablemachine.withgoogle.com/models/m8Wm3jRiN/";
 
 
 
@@ -241,7 +241,7 @@ async function playInstructionVideo() {
     if (model) {
         processFrame();
     } else {
-        console.log("https://teachablemachine.withgoogle.com/models/Yo8l9ARar/");
+        console.log("https://teachablemachine.withgoogle.com/models/m8Wm3jRiN/");
     }
 }
 
@@ -269,4 +269,5 @@ function stopWebcam() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 }
+
 
