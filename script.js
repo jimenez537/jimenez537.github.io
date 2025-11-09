@@ -128,8 +128,8 @@ function checkPose(prediction, video) {
                 }
                 break;
             case '3':
-                if ((time >= 11.5 && time <= 13.0 && !poseState.firstWindowTriggered) ||
-                    (time >= 17.5 && time <= 19.5 && !poseState.secondWindowTriggered)) {
+                if ((time >= 9 && time <= 10.0 && !poseState.firstWindowTriggered) ||
+                    (time >= 17.5 && time <= 19.0 && !poseState.secondWindowTriggered)) {
                     if (time <= 13.0) {
                         poseState.firstWindowTriggered = true;
                     } else {
@@ -141,7 +141,7 @@ function checkPose(prediction, video) {
                 }
                 break;
             case '4':
-                if (time >= 15.5 && time <= 16.6 && !poseState.triggered) {
+                if (time >= 15.0 && time <= 16.0 && !poseState.triggered) {
                     triggerExplosion(poseState);
                 }
                 break;
@@ -269,3 +269,4 @@ function stopWebcam() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 }
+
